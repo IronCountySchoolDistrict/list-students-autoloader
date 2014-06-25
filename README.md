@@ -16,6 +16,13 @@ List Students Autoloader is a PowerSchool customization that allows the user to 
     * *ReportWorks* will need to be restarted after the plugin is enabled for the newly created database extensions to appear in *ReportWorks*.
 * Navigate to */admin/studentlist/global_lists.html* to add global List Student reports that all users can access and use (but not modify or delete)
 
+### Usage ###
+* Access the List Students page from the same location
+* Global and User reports are selected from the drop-down menu on the right.
+* Only User reports can be created, modified and deleted by the user.
+* Fill in the report fields and click Save. Your report now appears in the report menu under User Lists
+* Clicking the Delete button will delete the currently selected report.
+
 ### Future goals ###
 * Write tests
 * Write help pages
