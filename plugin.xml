@@ -3,7 +3,7 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         description="Create, Modify and Delete your List Students reports"
         name="List Students Autoloader"
-        version="1.0"
+        version="4.0"
         xsi:schemaLocation="http://plugin.powerschool.pearson.com plugin.xsd">
     <publisher name="Iron County School District Data Team">
         <contact email="data@ironmail.org"/>
