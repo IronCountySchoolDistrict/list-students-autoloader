@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<psExtension xmlns="http://www.powerschool.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.powerschool.com psextension.xsd">
+    <extensionname>U_AUTOLOADER</extensionname>
+    <extendedTable coreTable="Users" dbTableName="U_DEF_AUTOLOADER_LISTS" childName="U_DEF_AUTOLOADER_LISTS" comment="">
+        <field name="SORT_FIELD_NAME3" type="String" length="100" alternateKey="users_dcid" alternateCoreTable="teachers"/>
+        <field name="SORT_FIELD_NAME1" type="String" length="100" alternateKey="users_dcid" alternateCoreTable="teachers"/>
+        <field name="SORT_FIELD_NAME2" type="String" length="100" alternateKey="users_dcid" alternateCoreTable="teachers"/>
+        <field name="GRIDLINES" type="Boolean" alternateKey="users_dcid" alternateCoreTable="teachers"/>
+        <field name="CELL_PADDING" type="Integer" alternateKey="users_dcid" alternateCoreTable="teachers"/>
+        <field name="COLUMN_TITLE9" type="String" length="100" alternateKey="users_dcid" alternateCoreTable="teachers"/>
+        <field name="COLUMN_TITLE8" type="String" length="100" alternateKey="users_dcid" alternateCoreTable="teachers"/>
+        <field name="COLUMN_TITLE7" type="String" length="100" alternateKey="users_dcid" alternateCoreTable="teachers"/>
+        <field name="FIELD_NAME8" type="String" length="100" alternateKey="users_dcid" alternateCoreTable="teachers"/>
+        <field name="FIELD_NAME9" type="String" length="100" alternateKey="users_dcid" alternateCoreTable="teachers"/>
+        <field name="FIELD_NAME10" type="String" length="100" alternateKey="users_dcid" alternateCoreTable="teachers"/>
+        <field name="COLUMN_TITLE2" type="String" length="100" alternateKey="users_dcid" alternateCoreTable="teachers"/>
+        <field name="FIELD_NAME4" type="String" length="100" alternateKey="users_dcid" alternateCoreTable="teachers"/>
+        <field name="FIELD_NAME5" type="String" length="100" alternateKey="users_dcid" alternateCoreTable="teachers"/>
+        <field name="COLUMN_TITLE1" type="String" length="100" alternateKey="users_dcid" alternateCoreTable="teachers"/>
+        <field name="FIELD_NAME6" type="String" length="100" alternateKey="users_dcid" alternateCoreTable="teachers"/>
+        <field name="FIELD_NAME7" type="String" length="100" alternateKey="users_dcid" alternateCoreTable="teachers"/>
+        <field name="COLUMN_TITLE6" type="String" length="100" alternateKey="users_dcid" alternateCoreTable="teachers"/>
+        <field name="FIELD_NAME1" type="String" length="100" alternateKey="users_dcid" alternateCoreTable="teachers"/>
+        <field name="COLUMN_TITLE5" type="String" length="100" alternateKey="users_dcid" alternateCoreTable="teachers"/>
+        <field name="FIELD_NAME2" type="String" length="100" alternateKey="users_dcid" alternateCoreTable="teachers"/>
+        <field name="COLUMN_TITLE4" type="String" length="100" alternateKey="users_dcid" alternateCoreTable="teachers"/>
+        <field name="FIELD_NAME3" type="String" length="100" alternateKey="users_dcid" alternateCoreTable="teachers"/>
+        <field name="COLUMN_TITLE3" type="String" length="100" alternateKey="users_dcid" alternateCoreTable="teachers"/>
+        <field name="SORT_DIR2" type="String" length="1" alternateKey="users_dcid" alternateCoreTable="teachers"/>
+        <field name="SORT_DIR3" type="String" length="1" alternateKey="users_dcid" alternateCoreTable="teachers"/>
+        <field name="EXPORT" type="Boolean" comment="Output to a tab-separated text file." alternateKey="users_dcid" alternateCoreTable="teachers"/>
+        <field name="SORT_DIR1" type="String" length="1" alternateKey="users_dcid" alternateCoreTable="teachers"/>
+        <field name="COLUMN_TITLE10" type="String" length="100" alternateKey="users_dcid" alternateCoreTable="teachers"/>
+        <field name="REPORT_TITLE" type="String" length="40" alternateKey="users_dcid" alternateCoreTable="teachers"/>
+        <field name="ROWS_BREAKS" type="Integer" comment="Insert a break every n rows." alternateKey="users_dcid" alternateCoreTable="teachers"/>
+    </extendedTable>
+</psExtension>

@@ -1,0 +1,66 @@
+<style>
+    #loadlist {
+        float: right;
+    }
+</style>
+
+<script>
+    if (typeof psData === 'undefined') {
+        psData = {};
+    }
+    psData.userDCID = ~[x:users_dcid];
+    psData.lastRunReportType = '~[displaypref:u~[x:userid]slrreporttype]';
+    psData.lastRunReportId = '~[displaypref:u~[x:userid]slrreportid]';
+</script>
+
+<script type="text/template" id="template">
+    <select name="loadlist" id="loadlist">
+        <option value="" selected></option>
+        <option>Global Lists</option>
+        <option>--------------</option>
+        <option></option>
+        <option>User Lists</option>
+        <option>--------------</option>
+    </select>
+</script>
+
+<script type="text/template" id="save-button-template">
+    <button type="submit" id="saveSubmit">Save</button>
+</script>
+
+<script type="text/template" id="delete-button-template">
+    <span id="delete-container" style="float: left;">
+        <a id="btnDelete" class="button confirmationReq">Delete</a>
+    </span>
+</script>
+
+<script type="text/template" id="global-load-list-template">
+    <option data-id="<%= report.id %>" data-type="global"><%= report.reportTitle %></option>
+</script>
+
+<script type="text/template" id="user-load-list-template">
+    <option data-id="<%= report.id %>" data-type="user"><%= report.reportTitle %></option>
+</script>
+
+<script type="text/template" id="extra-pref-fields-template">
+    <input type="hidden" name="[pref]u~[x:userid]slrreportid" value="" id="report-id">
+    <input type="hidden" name="[pref]u~[x:userid]slrreporttype" value="" id="report-type">
+</script>
+
+<script type="text/template" id="manual-entry-template">
+    <a style="margin-left: 10px;" class="button manEntBtn" href="#">Manual Entry</a>
+</script>
+
+<script type="text/template" id="note-template">
+    <p>Note: The last report that was run is displayed below, regardless of whether or not it was saved.
+</script>
+
+<script type="text/template" id="clear-form-template">
+    <button type="button" id="clear-form">Clear Form</button>
+</script>
+
+<script type="text/template" id="column-missing-template">
+    <p class="error-message">Field Name required for every Column Title</p>
+</script>
+
+<script src="/scripts/ListStudentsAutoloader/autoloader.js"></script>

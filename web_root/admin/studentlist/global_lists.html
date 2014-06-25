@@ -1,0 +1,22 @@
+<!-- GET parameter: frn -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Global Lists</title>
+    ~[wc:commonscripts]
+    <link href="/images/css/screen.css" rel="stylesheet" media="screen">
+    <link href="/images/css/print.css" rel="stylesheet" media="print">
+</head>
+<body>
+~[wc:admin_header_css]
+<h1>Global Lists</h1>
+<form action="/admin/changesrecorded.white.html" method="POST">
+    <!-- See the Advanced User Guide for Database Extensions for details on the ~[tlist_standalone] tag-->
+    ~[tlist_standalone:U_LOADER.U_DEF_GLOBAL_LISTS;displaycols:report_title,field_name1,column_title1,field_name2,column_title2,field_name3,column_title3,field_name4,column_title4,field_name5,column_title5,field_name6,column_title6,field_name7,column_title7,field_name8,column_title8,field_name9,column_title9,field_name10,column_title10,cell_padding,rows_breaks,gridlines,export,sort_field_name1,sort_dir1,sort_field_name2,sort_dir2,sort_field_name3,sort_dir3;fieldNames:Report Title,Field Name1,Column Title1,Field Name2,Column Title2,Field Name3,Column Title3,Field Name4,Column Title4,Field Name5,Column Title5,Field Name6,Column Title6,Field Name7,Column Title7,Field Name8,Column Title8,Field Name9,Column Title9,Field Name10,Column Title10,Padding In Each Cell,# Rows In Between Breaks,Gridlines,Export,Sort Field Name1,Sort Direction1,Sort Field Name2,Sort Direction2,Sort Field Name3,Sort Direction3;type:html]
+    <input type="hidden" name="ac" value="prim"/>
+    ~[submitbutton]
+</form>
+
+~[wc:admin_footer_css]
+</body>
+</html>
