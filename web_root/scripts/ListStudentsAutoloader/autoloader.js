@@ -34,11 +34,8 @@ require(['underscore'], function() {
     _.each(inputs, function(elem, index) {
         var jqElem = $j(elem);
         jqElem.attr('class', 'dialogR');
-        jqElem.attr('dialogcontent', '/admin/fields/fieldlist_yui.html?inf=' + elem.id + '&op=5');
+        jqElem.attr('href', '/admin/fields/fieldlist_yui.html?inf=' + elem.id + '&op=5');
         jqElem.attr('title', 'Fields');
-
-        // psDialogLazyWidget() only looks at the dialogcontent attribute for the url if href is present in tag, but is blank.
-        jqElem.attr('href', '');
 
         var manEntryTemplate = $j($j('#manual-entry-template').html());
         manEntryTemplate.insertAfter(elem);
