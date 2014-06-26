@@ -29,4 +29,6 @@ List Students Autoloader is a PowerSchool customization that allows the user to 
 
 ### Who do I talk to? ###
 * data@ironmail.org
-* PowerSource
+* Please feel free to ask questions or make suggestions on this page, or make a thread on the Customizations forum here on PowerSource.
+
+Many thanks!
