@@ -20,7 +20,7 @@ List Students Autoloader is a PowerSchool customization that allows users to cre
 * Access the List Students page from the same location
 * Global and User reports are selected from the drop-down menu on the right.
 * Only User reports can be created, modified and deleted by the user.
-* Fill in the report fields and click Save. Your report now appears in the report menu under User Lists
+* Fill in the report fields and click Save. Your report now appears in the report menu under User Lists with the title you entered in the Report Title text box.
 * Clicking the Delete button will delete the currently selected report.
 
 ### Future goals ###
