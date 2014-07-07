@@ -34,7 +34,7 @@
             SORT_DIR2,
             SORT_FIELD_NAME3,
             SORT_DIR3
-        from U_DEF_AUTOLOADER_LISTS where usersdcid=~[x:users_dcid]
+        from U_DEF_AUTOLOADER_LISTS2 where usersdcid=~[x:users_dcid]
     ]
         {
             "id": "~(id)",
