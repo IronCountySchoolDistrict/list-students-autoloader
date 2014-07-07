@@ -255,7 +255,7 @@ require(['underscore'], function() {
                 // a page using the ~[tlist_child] tag must first be loaded.
                 // The contents of the page are never used, but for some reason any POST requests that change child tables will return a
                 // security violation if the enable_requests page isn't loaded first.
-                $j.get('/admin/studentlist/enable_requests.html?frn=204' + psData.userDCID, function() {
+                $j.get('/admin/studentlist/enable_requests.txt?frn=204' + psData.userDCID, function() {
                     $j.ajax({
                         data: encodedData,
                         type: 'POST',

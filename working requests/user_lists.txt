@@ -1,0 +1,23 @@
+Remote Address:205.125.100.55:80
+Request URL:http://205.125.100.55/admin/user_lists.html?frn=20418277
+Request Method:GET
+Status Code:200 OK
+
+Request Headers
+Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Accept-Encoding:gzip,deflate,sdch
+Accept-Language:en-US,en;q=0.8
+Cache-Control:max-age=0
+Connection:keep-alive
+Cookie:mobileHome=mobile; JSESSIONID=FEE09FB1B52656B20778849DC1175463; psaid=<-V2->2/4852053/24965056603AIsWzy9byi2nUP5Hg1zT0dMTvWOMd8T<-V2->; currentSchool=0; powerSearchStudentPreferredFunction=List%20Students; powerSearchAdminStudentSearchMode=select; uiStateNav=null; uiStateCont=null; lastHref=http%3A%2F%2F205.125.100.55%2Fadmin%2Fuser_lists.html%3Ffrn%3D20418277
+Host:205.125.100.55
+User-Agent:Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.153 Safari/537.36
+Query String Parameters
+frn:20418277
+
+Response Headers
+Cache-control:no-store, no-cache, must-revalidate, post-check=0, check=0
+Content-Length:41556
+Content-Type:text/html;charset=UTF-8
+Date:Mon, 07 Jul 2014 23:18:47 GMT
+Server:Apache-Coyote/1.1
