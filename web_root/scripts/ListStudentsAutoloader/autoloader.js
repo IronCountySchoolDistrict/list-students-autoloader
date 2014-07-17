@@ -255,7 +255,7 @@ require(['underscore'], function() {
                 // a page using the ~[tlist_child] tag must first be loaded.
                 // The contents of the page are never used, but for some reason any POST requests that change child tables will return a
                 // security violation if the enable_requests page isn't loaded first.
-                $j.get('/admin/studentlist/enable_requests.txt?frn=204' + psData.userDCID, function() {
+                $j.get('/admin/studentlist/enable_requests.html?frn=204' + psData.userDCID, function() {
                     $j.ajax({
                         data: encodedData,
                         type: 'POST',
@@ -272,7 +272,7 @@ require(['underscore'], function() {
                 if (selectedReportId) {
                     var postData = [];
                     postData.push({
-                        name: 'DC-Users:' + psData.userDCID + '.U_AUTOLOADER.U_DEF_AUTOLOADER_LISTS2:' + selectedReportId,
+                        name: 'DC-Users:' + psData.userDCID + '.U_AUTOLOADER.U_DEF_AUTOLOADER_LISTS3:' + selectedReportId,
                         value: 'on'
                     });
                     postData.push({
@@ -339,7 +339,7 @@ require(['underscore'], function() {
     // Create a JavaScript object that matches the form ~[tlist_child] elements.
     function serializeFormForPost(recordId) {
         var extensionName = 'U_AUTOLOADER';
-        var tableName = 'U_DEF_AUTOLOADER_LISTS2';
+        var tableName = 'U_DEF_AUTOLOADER_LISTS3';
         var formData = [];
         var formInputs = $j(':input').filter(':not("[type=hidden]")').filter(':not("button")').filter(':not("#loadlist")').filter(':not(".headerrow")');
 
@@ -379,7 +379,7 @@ require(['underscore'], function() {
         ];
 
         //Create form key names that match the form (example):
-        //CF-[Users:18277.U_AUTOLOADER.U_DEF_AUTOLOADER_LISTS2:-1]REPORT_TITLE
+        //CF-[Users:18277.U_AUTOLOADER.U_DEF_AUTOLOADER_LISTS3:-1]REPORT_TITLE
         //CF-[{Parent table name}:{Foreign key to Users table}.{ExtensionGroup}.{ExtensionTable}:-1]{ColumnName}
         _.each(formInputs, function (elem, index) {
             var formKeyName = 'CF-[Users:' + psData.userDCID +
