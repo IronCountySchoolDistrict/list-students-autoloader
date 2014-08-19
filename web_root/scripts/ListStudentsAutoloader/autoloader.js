@@ -272,20 +272,22 @@ require(['underscore'], function() {
                 if (selectedReportId) {
                     var postData = [];
                     postData.push({
-                        name: 'DC-Users:' + psData.userDCID + '.U_AUTOLOADER.U_DEF_AUTOLOADER_LISTS3:' + selectedReportId,
+                        name: 'DC-Users:' + psData.userDCID + '.U_AUTOLOADER.U_DEF_AUTOLOADER_LISTS5:' + selectedReportId,
                         value: 'on'
                     });
                     postData.push({
                         name: 'ac',
                         value: 'prim'
                     });
-                    $j.ajax({
-                        data: postData,
-                        type: 'POST',
-                        url: '/admin/changesrecorded.white.html',
-                        success: function (msg) {
-                            window.location = '/admin/changesrecorded.white.html';
-                        }
+                    $j.get('/admin/studentlist/enable_requests.html?frn=204' + psData.userDCID, function() {
+                        $j.ajax({
+                            data: postData,
+                            type: 'POST',
+                            url: '/admin/changesrecorded.white.html',
+                            success: function (msg) {
+                                window.location = '/admin/changesrecorded.white.html';
+                            }
+                        });
                     });
                 }
             });
@@ -339,7 +341,7 @@ require(['underscore'], function() {
     // Create a JavaScript object that matches the form ~[tlist_child] elements.
     function serializeFormForPost(recordId) {
         var extensionName = 'U_AUTOLOADER';
-        var tableName = 'U_DEF_AUTOLOADER_LISTS3';
+        var tableName = 'U_DEF_AUTOLOADER_LISTS5';
         var formData = [];
         var formInputs = $j(':input').filter(':not("[type=hidden]")').filter(':not("button")').filter(':not("#loadlist")').filter(':not(".headerrow")');
 
@@ -379,7 +381,7 @@ require(['underscore'], function() {
         ];
 
         //Create form key names that match the form (example):
-        //CF-[Users:18277.U_AUTOLOADER.U_DEF_AUTOLOADER_LISTS3:-1]REPORT_TITLE
+        //CF-[Users:18277.U_AUTOLOADER.U_DEF_AUTOLOADER_LISTS5:-1]REPORT_TITLE
         //CF-[{Parent table name}:{Foreign key to Users table}.{ExtensionGroup}.{ExtensionTable}:-1]{ColumnName}
         _.each(formInputs, function (elem, index) {
             var formKeyName = 'CF-[Users:' + psData.userDCID +

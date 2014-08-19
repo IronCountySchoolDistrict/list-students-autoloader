@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <psExtension xmlns="http://www.powerschool.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.powerschool.com psextension.xsd">
     <extensionname>U_AUTOLOADER</extensionname>
-    <extendedTable coreTable="Users" dbTableName="U_DEF_AUTOLOADER_LISTS2" childName="U_DEF_AUTOLOADER_LISTS2" comment="">
+    <extendedTable coreTable="Users" dbTableName="U_DEF_AUTOLOADER_LISTS5" childName="U_DEF_AUTOLOADER_LISTS5" comment="">
         <field name="SORT_FIELD_NAME3" type="String" length="100" alternateKey="users_dcid" alternateCoreTable="teachers"/>
         <field name="SORT_FIELD_NAME1" type="String" length="100" alternateKey="users_dcid" alternateCoreTable="teachers"/>
         <field name="SORT_FIELD_NAME2" type="String" length="100" alternateKey="users_dcid" alternateCoreTable="teachers"/>
