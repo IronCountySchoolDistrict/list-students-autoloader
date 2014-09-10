@@ -3,4 +3,8 @@
 <link rel="stylesheet" href="/images/css/theme/crm-css/jquery-ui.custom.css" type="text/css">
 <link rel="stylesheet" href="/admin/includes/template/reports-printable.css" type="text/css" media="print">
 
+<script>
+    var gridEnabled = "~[displaypref:u~[x:userid]slrgridlines]";
+</script>
+
 <script src="/scripts/ListStudentsAutoloader/listresults.js"></script>

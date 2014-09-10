@@ -33,7 +33,7 @@
             SORT_DIR2,
             SORT_FIELD_NAME3,
             SORT_DIR3
-        from U_DEF_GLOBAL_LISTS2
+        from U_DEF_GLOBAL_LISTS
     ]
         {
             "id": "~(id)",

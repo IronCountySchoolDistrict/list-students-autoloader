@@ -55,7 +55,7 @@ require(['underscore'], function() {
 
     // Load saved user and global list reports.
     var reports = [];
-    $j.when($j.get('/admin/studentlist/data/sqlListGlobReports.txt'), $j.get('/admin/studentlist/data/sqlListReports.txt'))
+    $j.when($j.get('/admin/studentlist/json/sqlListGlobReports.txt'), $j.get('/admin/studentlist/json/sqlListReports.txt'))
         .done(function(globalReportsData, userReportsData) {
             var userReports = $j.parseJSON(userReportsData[0]);
             userReports.pop();
@@ -272,7 +272,7 @@ require(['underscore'], function() {
                 if (selectedReportId) {
                     var postData = [];
                     postData.push({
-                        name: 'DC-Users:' + psData.userDCID + '.U_AUTOLOADER.U_DEF_AUTOLOADER_LISTS5:' + selectedReportId,
+                        name: 'DC-Users:' + psData.userDCID + '.U_AUTOLOADER.U_DEF_AUTOLOADER_LISTS:' + selectedReportId,
                         value: 'on'
                     });
                     postData.push({
@@ -341,7 +341,7 @@ require(['underscore'], function() {
     // Create a JavaScript object that matches the form ~[tlist_child] elements.
     function serializeFormForPost(recordId) {
         var extensionName = 'U_AUTOLOADER';
-        var tableName = 'U_DEF_AUTOLOADER_LISTS5';
+        var tableName = 'U_DEF_AUTOLOADER_LISTS';
         var formData = [];
         var formInputs = $j(':input').filter(':not("[type=hidden]")').filter(':not("button")').filter(':not("#loadlist")').filter(':not(".headerrow")');
 
@@ -381,7 +381,7 @@ require(['underscore'], function() {
         ];
 
         //Create form key names that match the form (example):
-        //CF-[Users:18277.U_AUTOLOADER.U_DEF_AUTOLOADER_LISTS5:-1]REPORT_TITLE
+        //CF-[Users:18277.U_AUTOLOADER.U_DEF_AUTOLOADER_LISTS:-1]REPORT_TITLE
         //CF-[{Parent table name}:{Foreign key to Users table}.{ExtensionGroup}.{ExtensionTable}:-1]{ColumnName}
         _.each(formInputs, function (elem, index) {
             var formKeyName = 'CF-[Users:' + psData.userDCID +

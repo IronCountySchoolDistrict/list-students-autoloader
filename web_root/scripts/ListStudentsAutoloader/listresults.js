@@ -1,10 +1,13 @@
 /*global $j,_,require*/
-var dataTablesUri = 'https://cdnjs.cloudflare.com/ajax/libs/datatables/1.9.4/jquery.dataTables.min.js';
+var dataTablesUri = '//cdnjs.cloudflare.com/ajax/libs/datatables/1.9.4/jquery.dataTables.min.js';
 require(['underscore', dataTablesUri], function() {
     'use strict';
 
     var tableElem = $j('table').eq(0);
     tableElem.attr({'class': 'display'});
+    if (gridEnabled.trim() === '1') {
+        tableElem.attr({'class': 'cell-border'});
+    }
     var columnHeaders = tableElem.find('tr').eq(0);
     var headers = columnHeaders.clone();
     columnHeaders.remove();
