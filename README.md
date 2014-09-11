@@ -1,12 +1,15 @@
-# README #
 
-List Students Autoloader is a PowerSchool customization that allows users to create, modify and delete List Students reports. Global List Students reports can also be created for commonly-used reports that all users can access. The report results page has also been modified to use Datatables to allow for data sorting, filtering
+# List Students Autoloader 
+
+List Students Autoloader is a PowerSchool customization that allows users to create, modify and delete List Students reports. 
+Global List Students reports can also be created for commonly-used reports that all users can access. 
+The report results page has also been modified to use Datatables to allow for data sorting and filtering.
 
 ### Requirements ###
 * Recent verisons of PowerSchool 7 are supported (>7.9), and PowerSchool 8.0 is also supported.
 * CPM Plugins -- This customization uses the PowerSchool plugin package format for installation, so using a custom web_root is not recommended for use with this plugin.
 
-### How do I get set up? ###
+### Install ###
 * Download the .zip plugin file.
 * In PowerSchool Administrator, navigate to **System** -> **System Settings** -> **Plugin Management Configuration**
 * Click **Install**
@@ -25,9 +28,9 @@ List Students Autoloader is a PowerSchool customization that allows users to cre
 
 ### Future goals ###
 * Write tests
-* Write help pages
+* Write PowerSchool help pages
 
-### Who do I talk to? ###
+### Where can I find help? ###
 * data@ironmail.org
 * Please feel free to ask questions or make suggestions on this page, or make a thread on the Customizations forum here on PowerSource.
 

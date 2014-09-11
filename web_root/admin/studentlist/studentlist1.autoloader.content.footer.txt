@@ -56,7 +56,7 @@
 </script>
 
 <script type="text/template" id="clear-form-template">
-    <button type="button" id="clear-form">Clear Form</button>
+    <button type="button" id="clear-form" style="margin-left: 10px;">Clear Form</button>
 </script>
 
 <script type="text/template" id="column-missing-template">

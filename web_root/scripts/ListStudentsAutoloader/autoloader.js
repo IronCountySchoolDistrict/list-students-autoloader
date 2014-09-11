@@ -34,6 +34,7 @@ require(['underscore'], function() {
     _.each(inputs, function(elem, index) {
         var jqElem = $j(elem);
         jqElem.attr('class', 'dialogR');
+
         jqElem.attr('dialogcontent', '/admin/fields/fieldlist_yui.html?inf=' + elem.id + '&op=5');
         jqElem.attr('title', 'Fields');
 
@@ -58,6 +59,7 @@ require(['underscore'], function() {
 
     // Load saved user and global list reports.
     var reports = [];
+
     $j.when($j.get('/admin/studentlist/data/sqlListGlobReports.txt'), $j.get('/admin/studentlist/data/sqlListReports.txt'))
         .done(function(globalReportsData, userReportsData) {
             var userReports = $j.parseJSON(userReportsData[0]);
@@ -206,7 +208,6 @@ require(['underscore'], function() {
 
             $j(loadListOption[0]).prop({'selected': true});
 
-
             /**
              *
              * @returns {jQuery|*} Returns the selected option in #loadlist if it's a valid selection. Return undefined
@@ -276,20 +277,23 @@ require(['underscore'], function() {
                 if (selectedReportId) {
                     var postData = [];
                     postData.push({
-                        name: 'DC-Users:18277.U_AUTOLOADER.U_DEF_AUTOLOADER_LISTS:' + selectedReportId,
+                        name: 'DC-Users:' + psData.userDCID + '.U_AUTOLOADER.U_DEF_AUTOLOADER_LISTS:' + selectedReportId,
+
                         value: 'on'
                     });
                     postData.push({
                         name: 'ac',
                         value: 'prim'
                     });
-                    $j.ajax({
-                        data: postData,
-                        type: 'POST',
-                        url: '/admin/changesrecorded.white.html',
-                        success: function (msg) {
-                            window.location = '/admin/changesrecorded.white.html';
-                        }
+                    $j.get('/admin/studentlist/enable_requests.html?frn=204' + psData.userDCID, function() {
+                        $j.ajax({
+                            data: postData,
+                            type: 'POST',
+                            url: '/admin/changesrecorded.white.html',
+                            success: function (msg) {
+                                window.location = '/admin/changesrecorded.white.html';
+                            }
+                        });
                     });
                 }
             });
@@ -349,41 +353,39 @@ require(['underscore'], function() {
 
         // Field names of database extension table in the order they appear on the form.
         var customFieldNames = [
-            'REPORT_TITLE',
-            'FIELD_NAME1',
-            'COLUMN_TITLE1',
-            'FIELD_NAME2',
-            'COLUMN_TITLE2',
-            'FIELD_NAME3',
-            'COLUMN_TITLE3',
-            'FIELD_NAME4',
-            'COLUMN_TITLE4',
-            'FIELD_NAME5',
-            'COLUMN_TITLE5',
-            'FIELD_NAME6',
-            'COLUMN_TITLE6',
-            'FIELD_NAME7',
-            'COLUMN_TITLE7',
-            'FIELD_NAME8',
-            'COLUMN_TITLE8',
-            'FIELD_NAME9',
-            'COLUMN_TITLE9',
-            'FIELD_NAME10',
-            'COLUMN_TITLE10',
-            'CELL_PADDING',
-            'ROWS_BREAKS',
-            'GRIDLINES',
-            'EXPORT',
-            'SORT_FIELD_NAME1',
-            'SORT_DIR1',
-            'SORT_FIELD_NAME2',
-            'SORT_DIR2',
-            'SORT_FIELD_NAME3',
-            'SORT_DIR3'
+            'report_title',
+            'field_name1',
+            'column_title1',
+            'field_name2',
+            'column_title2',
+            'field_name3',
+            'column_title3',
+            'field_name4',
+            'column_title4',
+            'field_name5',
+            'column_title5',
+            'field_name6',
+            'column_title6',
+            'field_name7',
+            'column_title7',
+            'field_name8',
+            'column_title8',
+            'field_name9',
+            'column_title9',
+            'field_name10',
+            'column_title10',
+            'cell_padding$format=numeric',
+            'rows_breaks$format=numeric',
+            'gridlines',
+            'export',
+            'sort_field_name1',
+            'sort_dir1',
+            'sort_field_name2',
+            'sort_dir2',
+            'sort_field_name3',
+            'sort_dir3'
         ];
 
-        //Create form key names that match the form (example):
-        //CF-[Users:18277.U_AUTOLOADER.U_DEF_AUTOLOADER_LISTS3:-1]REPORT_TITLE
         //CF-[{Parent table name}:{Foreign key to Users table}.{ExtensionGroup}.{ExtensionTable}:-1]{ColumnName}
         _.each(formInputs, function (elem, index) {
             var formKeyName = 'CF-[Users:' + psData.userDCID +
@@ -434,6 +436,7 @@ require(['underscore'], function() {
             aFormElements[22].value = report.hasOwnProperty('columnTitle10') ? report.columnTitle10 : '';
             aFormElements[23].value = report.hasOwnProperty('cellPadding') ? report.cellPadding : '';
             aFormElements[24].value = report.hasOwnProperty('rowsBreaks') ? report.rowsBreaks : '';
+
             if (report.hasOwnProperty('gridlines')) {
                 if (!report.gridlines || report.gridlines === '0') {
                     aFormElements[26].checked = false;
