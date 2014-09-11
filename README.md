@@ -31,6 +31,6 @@ The report results page has also been modified to use Datatables to allow for da
 
 ### Where can I find help? ###
 * data@ironmail.org
-* Please feel free to ask questions or make suggestions on this page, or make a thread on the Customizations forum here on PowerSource.
+* Make a thread on the Customizations forum on PowerSource
 
-Many thanks!
+Thanks!
