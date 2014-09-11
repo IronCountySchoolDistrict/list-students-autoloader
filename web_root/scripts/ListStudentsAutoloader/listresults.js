@@ -5,9 +5,11 @@ require(['underscore', dataTablesUri], function() {
 
     var tableElem = $j('table').eq(0);
     tableElem.attr({'class': 'display'});
+
     if (gridEnabled.trim() === '1') {
         tableElem.attr({'class': 'cell-border'});
     }
+
     var columnHeaders = tableElem.find('tr').eq(0);
     var headers = columnHeaders.clone();
     columnHeaders.remove();

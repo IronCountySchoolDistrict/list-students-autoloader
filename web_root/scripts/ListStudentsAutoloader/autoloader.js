@@ -34,8 +34,12 @@ require(['underscore'], function() {
     _.each(inputs, function(elem, index) {
         var jqElem = $j(elem);
         jqElem.attr('class', 'dialogR');
-        jqElem.attr('href', '/admin/fields/fieldlist_yui.html?inf=' + elem.id + '&op=5');
+
+        jqElem.attr('dialogcontent', '/admin/fields/fieldlist_yui.html?inf=' + elem.id + '&op=5');
         jqElem.attr('title', 'Fields');
+
+        // psDialogLazyWidget() only looks at the dialogcontent attribute for the url if href is present in tag, but is blank.
+        jqElem.attr('href', '');
 
         var manEntryTemplate = $j($j('#manual-entry-template').html());
         manEntryTemplate.insertAfter(elem);
@@ -55,7 +59,8 @@ require(['underscore'], function() {
 
     // Load saved user and global list reports.
     var reports = [];
-    $j.when($j.get('/admin/studentlist/json/sqlListGlobReports.txt'), $j.get('/admin/studentlist/json/sqlListReports.txt'))
+
+    $j.when($j.get('/admin/studentlist/data/sqlListGlobReports.txt'), $j.get('/admin/studentlist/data/sqlListReports.txt'))
         .done(function(globalReportsData, userReportsData) {
             var userReports = $j.parseJSON(userReportsData[0]);
             userReports.pop();
@@ -273,6 +278,7 @@ require(['underscore'], function() {
                     var postData = [];
                     postData.push({
                         name: 'DC-Users:' + psData.userDCID + '.U_AUTOLOADER.U_DEF_AUTOLOADER_LISTS:' + selectedReportId,
+
                         value: 'on'
                     });
                     postData.push({
@@ -380,8 +386,6 @@ require(['underscore'], function() {
             'sort_dir3'
         ];
 
-        //Create form key names that match the form (example):
-        //CF-[Users:18277.U_AUTOLOADER.U_DEF_AUTOLOADER_LISTS:-1]REPORT_TITLE
         //CF-[{Parent table name}:{Foreign key to Users table}.{ExtensionGroup}.{ExtensionTable}:-1]{ColumnName}
         _.each(formInputs, function (elem, index) {
             var formKeyName = 'CF-[Users:' + psData.userDCID +
