@@ -221,7 +221,12 @@ require(['underscore'], function() {
                     $j(elem).data().id.toString() === psData.lastRunReportId;
             });
 
+            // Hide Delete button on load if the last report that was run was a global report.
             $j(loadListOption[0]).prop({'selected': true});
+
+            if ($j(loadListOption).data().type === 'global') {
+                $j('.btnConfirmProxy').css({visibility: 'hidden'});
+            }
 
             /**
              *
