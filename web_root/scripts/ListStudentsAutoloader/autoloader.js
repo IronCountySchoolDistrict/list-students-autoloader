@@ -43,11 +43,11 @@ require(['underscore'], function() {
 
         var manEntryTemplate = $j($j('#manual-entry-template').html());
         manEntryTemplate.insertAfter(elem);
-        var matchingFieldNameInput = $j('#tt' + (index + 1));
+        var matchingfield_nameInput = $j('#tt' + (index + 1));
         var manEntryBtn = $j('.manEntBtn').last();
         manEntryBtn.on('click', function(e) {
             e.preventDefault();
-            matchingFieldNameInput.get(0).focus();
+            matchingfield_nameInput.get(0).focus();
         });
     });
 
@@ -60,19 +60,20 @@ require(['underscore'], function() {
     // Load saved user and global list reports.
     var reports = [];
 
-    $j.when($j.get('/admin/studentlist/data/sqlListGlobReports.txt'), $j.get('/admin/studentlist/data/sqlListReports.txt'))
-        .done(function(globalReportsData, userReportsData) {
-            var userReports = $j.parseJSON(userReportsData[0]);
-            userReports.pop();
+    $j.when($j.get('/ws/schema/table/U_DEF_AUTOLOADER_LISTS?q=usersdcid==' + psData.userDCID + '&projection=*'), $j.get('/ws/schema/table/U_DEF_GLOBAL_LISTS?projection=*'))
+        .done(function(userReportsData, globalReportsData) {
+            var autoloaderTableName = userReportsData[0]['name'].toLowerCase();
+            var userReports = userReportsData[0]['record'];
 
-            var globalReports = $j.parseJSON(globalReportsData[0]);
-            globalReports.pop();
+            var globalListsTableName = globalReportsData[0]['name'].toLowerCase();
+            var globalReports = globalReportsData[0]['record'];
 
             // Add all elements from both userReports and globalReports to reports Array.
             reports = userReports.concat(globalReports);
 
             // Insert list option tags into #loadlist select
-            _.each(globalReports, function(elem) {
+            _.each(globalReports, function(report) {
+                var reportData = report['tables'][globalListsTableName];
                 var loadListTemplate = $j('#global-load-list-template').html();
 
                 // Get the Global Lists option.
@@ -82,12 +83,13 @@ require(['underscore'], function() {
 
                 // Get the next option in the select tag, which is the dash-separator option.
                 var select = $j(globalReportsOption).next();
-                var renderedTemplate = _.template(loadListTemplate, {report: elem});
+                var renderedTemplate = _.template(loadListTemplate, {report: reportData});
 
                 $j(renderedTemplate).insertAfter(select);
             });
 
-            _.each(userReports, function(elem) {
+            _.each(userReports, function(report) {
+                var reportData = report['tables'][autoloaderTableName];
                 var loadListTemplate = $j('#user-load-list-template').html();
 
                 // Index of User Reports option in an Array of all child options of #loadlist.
@@ -95,9 +97,13 @@ require(['underscore'], function() {
                     return $j(elem).val() === 'User Lists';
                 });
 
-                // Get the next option in the select tag, which is the dash-separator option.
+                if (!reportData['report_title']) {
+                    reportData['report_title'] = '{Report With No Name}';
+                }
+
+                // Get the next option in the select element, which is the dash-separator option.
                 var select = $j(userReportsOption).next();
-                var renderedTemplate = _.template(loadListTemplate, {report: elem});
+                var renderedTemplate = _.template(loadListTemplate, {report: reportData});
 
                 $j(renderedTemplate).insertAfter(select);
             });
@@ -106,17 +112,26 @@ require(['underscore'], function() {
                 var selectedOption = getSelectedOption();
                 if (selectedOption) {
                     var selectedOptionId = selectedOption.data().id;
-                    // A user-defined report was selected.
                     if (selectedOptionId) {
                         var selectedReport = _.filter(reports, function(currData) {
-                            return currData.id === selectedOptionId.toString();
+                            return currData.id === selectedOptionId;
                         });
-                        loadFormFields(selectedReport[0]);
+
+
+                        var selectedReportObj;
+                        // If the users key is present, this implies that this report is
+                        // a user report because it is linked to a User record.
+                        if (selectedReport[0]['tables']['users']) {
+                            selectedReportObj = selectedReport[0]['tables'][autoloaderTableName];
+                        } else {
+                            selectedReportObj = selectedReport[0]['tables'][globalListsTableName];
+                        }
+                        loadFormFields(selectedReportObj);
                         // Make sure delete button is only visible for user lists.
                         if (selectedOption.data().type === 'global') {
-                            $j('#btnConfirmProxy').css({visibility: 'hidden'});
+                            $j('.btnConfirmProxy').css({visibility: 'hidden'});
                         } else {
-                            $j('#btnConfirmProxy').css({visibility: 'visible'})
+                            $j('.btnConfirmProxy').css({visibility: 'visible'})
                         }
                     }
                 }
@@ -134,7 +149,7 @@ require(['underscore'], function() {
                     // Remove properties from tempObj that aren't present in the form.
                     delete tempObj.dcid;
                     delete tempObj.id;
-                    delete tempObj.reportTitle;
+                    delete tempObj.report_title;
                     delete tempObj.type;
 
                     return _.isEqual(formObj, tempObj);
@@ -153,43 +168,43 @@ require(['underscore'], function() {
                 var columnMissingTemplate = $j($j('#column-missing-template').html());
                 $j('.error-message').remove();
                 var formValid = true;
-                if (formObj.columnTitle1 && !formObj.fieldName1) {
+                if (formObj.column_title1 && !formObj.field_name1) {
                     columnMissingTemplate.clone().insertAfter($j('#tt1').next());
                     formValid = false;
                 }
-                if (formObj.columnTitle2 && !formObj.fieldName2) {
+                if (formObj.column_title2 && !formObj.field_name2) {
                     columnMissingTemplate.clone().insertAfter($j('#tt2').next());
                     formValid = false;
                 }
-                if (formObj.columnTitle3 && !formObj.fieldName3) {
+                if (formObj.column_title3 && !formObj.field_name3) {
                     columnMissingTemplate.clone().insertAfter($j('#tt3').next());
                     formValid = false;
                 }
-                if (formObj.columnTitle4 && !formObj.fieldName4) {
+                if (formObj.column_title4 && !formObj.field_name4) {
                     columnMissingTemplate.clone().insertAfter($j('#tt4').next());
                     formValid = false;
                 }
-                if (formObj.columnTitle5 && !formObj.fieldName5) {
+                if (formObj.column_title5 && !formObj.field_name5) {
                     columnMissingTemplate.clone().insertAfter($j('#tt5').next());
                     formValid = false;
                 }
-                if (formObj.columnTitle6 && !formObj.fieldName6) {
+                if (formObj.column_title6 && !formObj.field_name6) {
                     columnMissingTemplate.clone().insertAfter($j('#tt6').next());
                     formValid = false;
                 }
-                if (formObj.columnTitle7 && !formObj.fieldName7) {
+                if (formObj.column_title7 && !formObj.field_name7) {
                     columnMissingTemplate.clone().insertAfter($j('#tt7').next());
                     formValid = false;
                 }
-                if (formObj.columnTitle8 && !formObj.fieldName8) {
+                if (formObj.column_title8 && !formObj.field_name8) {
                     columnMissingTemplate.clone().insertAfter($j('#tt8').next());
                     formValid = false;
                 }
-                if (formObj.columnTitle9 && !formObj.fieldName9) {
+                if (formObj.column_title9 && !formObj.field_name9) {
                     columnMissingTemplate.clone().insertAfter($j('#tt9').next());
                     formValid = false;
                 }
-                if (formObj.columnTitle10 && !formObj.fieldName10) {
+                if (formObj.column_title10 && !formObj.field_name10) {
                     columnMissingTemplate.clone().insertAfter($j('#tt10').next());
                     formValid = false;
                 }
@@ -240,7 +255,7 @@ require(['underscore'], function() {
                     })[0];
                     delete selectedReport.dcid;
                     delete selectedReport.id;
-                    delete selectedReport.reportTitle;
+                    delete selectedReport.report_title;
                     delete selectedReport.type;
 
                     if (_.isEqual(formObj, selectedReport)) {
@@ -302,45 +317,45 @@ require(['underscore'], function() {
     function serializeFormToObject() {
         var formObj = {};
         var aFormElements = document.forms.aForm.elements;
-        formObj.fieldName1 = aFormElements[3].value;
-        formObj.columnTitle1 = aFormElements[4].value;
-        formObj.fieldName2 = aFormElements[5].value;
-        formObj.columnTitle2 = aFormElements[6].value;
-        formObj.fieldName3 = aFormElements[7].value;
-        formObj.columnTitle3 = aFormElements[8].value;
-        formObj.fieldName4 = aFormElements[9].value;
-        formObj.columnTitle4 = aFormElements[10].value;
-        formObj.fieldName5 = aFormElements[11].value;
-        formObj.columnTitle5 = aFormElements[12].value;
-        formObj.fieldName6 = aFormElements[13].value;
-        formObj.columnTitle6 = aFormElements[14].value;
-        formObj.fieldName7 = aFormElements[15].value;
-        formObj.columnTitle7 = aFormElements[16].value;
-        formObj.fieldName8 = aFormElements[17].value;
-        formObj.columnTitle8 = aFormElements[18].value;
-        formObj.fieldName9 = aFormElements[19].value;
-        formObj.columnTitle9 = aFormElements[20].value;
-        formObj.fieldName10 = aFormElements[21].value;
-        formObj.columnTitle10 = aFormElements[22].value;
-        formObj.cellPadding = aFormElements[23].value;
-        formObj.rowsBreaks = aFormElements[24].value;
+        formObj.field_name1 = aFormElements[3].value;
+        formObj.column_title1 = aFormElements[4].value;
+        formObj.field_name2 = aFormElements[5].value;
+        formObj.column_title2 = aFormElements[6].value;
+        formObj.field_name3 = aFormElements[7].value;
+        formObj.column_title3 = aFormElements[8].value;
+        formObj.field_name4 = aFormElements[9].value;
+        formObj.column_title4 = aFormElements[10].value;
+        formObj.field_name5 = aFormElements[11].value;
+        formObj.column_title5 = aFormElements[12].value;
+        formObj.field_name6 = aFormElements[13].value;
+        formObj.column_title6 = aFormElements[14].value;
+        formObj.field_name7 = aFormElements[15].value;
+        formObj.column_title7 = aFormElements[16].value;
+        formObj.field_name8 = aFormElements[17].value;
+        formObj.column_title8 = aFormElements[18].value;
+        formObj.field_name9 = aFormElements[19].value;
+        formObj.column_title9 = aFormElements[20].value;
+        formObj.field_name10 = aFormElements[21].value;
+        formObj.column_title10 = aFormElements[22].value;
+        formObj.cell_padding = aFormElements[23].value;
+        formObj.rows_breaks = aFormElements[24].value;
         if (aFormElements[26].checked) {
             formObj.gridlines = '1';
         } else {
             formObj.gridlines = '0';
         }
         if (aFormElements[27].checked) {
-            formObj.exportVal = '1';
+            formObj.export_val = '1';
         } else {
-            formObj.exportVal = '0';
+            formObj.export_val = '0';
         }
 
-        formObj.sortFieldName1 = aFormElements[28].value;
-        formObj.sortDir1 = aFormElements[29].value;
-        formObj.sortFieldName2 = aFormElements[30].value;
-        formObj.sortDir2 = aFormElements[31].value;
-        formObj.sortFieldName3 = aFormElements[32].value;
-        formObj.sortDir3 = aFormElements[33].value;
+        formObj.sort_field_name1 = aFormElements[28].value;
+        formObj.sort_dir1 = aFormElements[29].value;
+        formObj.sort_field_name2 = aFormElements[30].value;
+        formObj.sort_dir2 = aFormElements[31].value;
+        formObj.sort_field_name3 = aFormElements[32].value;
+        formObj.sort_dir3 = aFormElements[33].value;
         return formObj;
     }
 
@@ -352,7 +367,7 @@ require(['underscore'], function() {
         var formInputs = $j(':input').filter(':not("[type=hidden]")').filter(':not("button")').filter(':not("#loadlist")').filter(':not(".headerrow")');
 
         // Field names of database extension table in the order they appear on the form.
-        var customFieldNames = [
+        var customfield_names = [
             'report_title',
             'field_name1',
             'column_title1',
@@ -399,7 +414,7 @@ require(['underscore'], function() {
             } else {
                 formKeyName += recordId;
             }
-            formKeyName += ']' + customFieldNames[index];
+            formKeyName += ']' + customfield_names[index];
 
             if (formInputs.eq(index).attr('type') === 'checkbox') {
                 formData.push({ name: formKeyName, value: formInputs.eq(index).is(':checked') ? 1 : 0 });
@@ -413,29 +428,29 @@ require(['underscore'], function() {
     function loadFormFields(report) {
         var aFormElements = document.forms.aForm.elements;
         if (report) {
-            aFormElements[0].value = report.hasOwnProperty('reportTitle') ? report.reportTitle : '';
-            aFormElements[3].value = report.hasOwnProperty('fieldName1') ? report.fieldName1 : '';
-            aFormElements[4].value = report.hasOwnProperty('columnTitle1') ? report.columnTitle1 : '';
-            aFormElements[5].value = report.hasOwnProperty('fieldName2') ? report.fieldName2 : '';
-            aFormElements[6].value = report.hasOwnProperty('columnTitle2') ? report.columnTitle2 : '';
-            aFormElements[7].value = report.hasOwnProperty('fieldName3') ? report.fieldName3 : '';
-            aFormElements[8].value = report.hasOwnProperty('columnTitle3') ? report.columnTitle3 : '';
-            aFormElements[9].value = report.hasOwnProperty('fieldName4') ? report.fieldName4 : '';
-            aFormElements[10].value = report.hasOwnProperty('columnTitle4') ? report.columnTitle4 : '';
-            aFormElements[11].value = report.hasOwnProperty('fieldName5') ? report.fieldName5 : '';
-            aFormElements[12].value = report.hasOwnProperty('columnTitle5') ? report.columnTitle5 : '';
-            aFormElements[13].value = report.hasOwnProperty('fieldName6') ? report.fieldName6 : '';
-            aFormElements[14].value = report.hasOwnProperty('columnTitle6') ? report.columnTitle6 : '';
-            aFormElements[15].value = report.hasOwnProperty('fieldName7') ? report.fieldName7 : '';
-            aFormElements[16].value = report.hasOwnProperty('columnTitle7') ? report.columnTitle7 : '';
-            aFormElements[17].value = report.hasOwnProperty('fieldName8') ? report.fieldName8 : '';
-            aFormElements[18].value = report.hasOwnProperty('columnTitle8') ? report.columnTitle8 : '';
-            aFormElements[19].value = report.hasOwnProperty('fieldName9') ? report.fieldName9 : '';
-            aFormElements[20].value = report.hasOwnProperty('columnTitle9') ? report.columnTitle9 : '';
-            aFormElements[21].value = report.hasOwnProperty('fieldName10') ? report.fieldName10 : '';
-            aFormElements[22].value = report.hasOwnProperty('columnTitle10') ? report.columnTitle10 : '';
-            aFormElements[23].value = report.hasOwnProperty('cellPadding') ? report.cellPadding : '';
-            aFormElements[24].value = report.hasOwnProperty('rowsBreaks') ? report.rowsBreaks : '';
+            aFormElements[0].value = report.hasOwnProperty('report_title') ? report.report_title : '';
+            aFormElements[3].value = report.hasOwnProperty('field_name1') ? report.field_name1 : '';
+            aFormElements[4].value = report.hasOwnProperty('column_title1') ? report.column_title1 : '';
+            aFormElements[5].value = report.hasOwnProperty('field_name2') ? report.field_name2 : '';
+            aFormElements[6].value = report.hasOwnProperty('column_title2') ? report.column_title2 : '';
+            aFormElements[7].value = report.hasOwnProperty('field_name3') ? report.field_name3 : '';
+            aFormElements[8].value = report.hasOwnProperty('column_title3') ? report.column_title3 : '';
+            aFormElements[9].value = report.hasOwnProperty('field_name4') ? report.field_name4 : '';
+            aFormElements[10].value = report.hasOwnProperty('column_title4') ? report.column_title4 : '';
+            aFormElements[11].value = report.hasOwnProperty('field_name5') ? report.field_name5 : '';
+            aFormElements[12].value = report.hasOwnProperty('column_title5') ? report.column_title5 : '';
+            aFormElements[13].value = report.hasOwnProperty('field_name6') ? report.field_name6 : '';
+            aFormElements[14].value = report.hasOwnProperty('column_title6') ? report.column_title6 : '';
+            aFormElements[15].value = report.hasOwnProperty('field_name7') ? report.field_name7 : '';
+            aFormElements[16].value = report.hasOwnProperty('column_title7') ? report.column_title7 : '';
+            aFormElements[17].value = report.hasOwnProperty('field_name8') ? report.field_name8 : '';
+            aFormElements[18].value = report.hasOwnProperty('column_title8') ? report.column_title8 : '';
+            aFormElements[19].value = report.hasOwnProperty('field_name9') ? report.field_name9 : '';
+            aFormElements[20].value = report.hasOwnProperty('column_title9') ? report.column_title9 : '';
+            aFormElements[21].value = report.hasOwnProperty('field_name10') ? report.field_name10 : '';
+            aFormElements[22].value = report.hasOwnProperty('column_title10') ? report.column_title10 : '';
+            aFormElements[23].value = report.hasOwnProperty('cell_padding') ? report.cell_padding : '';
+            aFormElements[24].value = report.hasOwnProperty('rows_breaks') ? report.rows_breaks : '';
 
             if (report.hasOwnProperty('gridlines')) {
                 if (!report.gridlines || report.gridlines === '0') {
@@ -445,19 +460,19 @@ require(['underscore'], function() {
                 }
             }
 
-            if (report.hasOwnProperty('exportVal')) {
-                if (!report.exportVal || report.exportVal === '0') {
+            if (report.hasOwnProperty('export_val')) {
+                if (!report.export_val || report.export_val === '0') {
                     aFormElements[27].checked = false;
                 } else {
                     aFormElements[27].checked = true;
                 }
             }
-            aFormElements[28].value = report.hasOwnProperty('sortFieldName1') ? report.sortFieldName1 : '';
-            aFormElements[29].value = report.hasOwnProperty('sortDir1') ? report.sortDir1 : '>';
-            aFormElements[30].value = report.hasOwnProperty('sortFieldName2') ? report.sortFieldName2 : '';
-            aFormElements[31].value = report.hasOwnProperty('sortDir2') ? report.sortDir2 : '>';
-            aFormElements[32].value = report.hasOwnProperty('sortFieldName3') ? report.sortFieldName3 : '';
-            aFormElements[33].value = report.hasOwnProperty('sortDir3') ? report.sortDir3 : '>';
+            aFormElements[28].value = report.hasOwnProperty('sort_field_name1') ? report.sort_field_name1 : '';
+            aFormElements[29].value = report.hasOwnProperty('sort_dir1') ? report.sort_dir1 : '>';
+            aFormElements[30].value = report.hasOwnProperty('sort_field_name2') ? report.sort_field_name2 : '';
+            aFormElements[31].value = report.hasOwnProperty('sort_dir2') ? report.sort_dir2 : '>';
+            aFormElements[32].value = report.hasOwnProperty('sort_field_name3') ? report.sort_field_name3 : '';
+            aFormElements[33].value = report.hasOwnProperty('sort_dir3') ? report.sort_dir3 : '>';
             aFormElements[34].value = 'prim';
         } else {
             aFormElements[0].value = '';

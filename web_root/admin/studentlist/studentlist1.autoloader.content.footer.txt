@@ -11,6 +11,7 @@
     psData.userDCID = ~[x:users_dcid];
     psData.lastRunReportType = '~[displaypref:u~[x:userid]slrreporttype]';
     psData.lastRunReportId = '~[displaypref:u~[x:userid]slrreportid]';
+
 </script>
 
 <script type="text/template" id="template">
@@ -35,11 +36,11 @@
 </script>
 
 <script type="text/template" id="global-load-list-template">
-    <option data-id="<%= report.id %>" data-type="global"><%= report.reportTitle %></option>
+    <option data-id="<%= report.id %>" data-type="global"><%= report.report_title %></option>
 </script>
 
 <script type="text/template" id="user-load-list-template">
-    <option data-id="<%= report.id %>" data-type="user"><%= report.reportTitle %></option>
+    <option data-id="<%= report.id %>" data-type="user"><%= report.report_title %></option>
 </script>
 
 <script type="text/template" id="extra-pref-fields-template">
