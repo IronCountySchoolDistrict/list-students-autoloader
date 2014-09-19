@@ -147,10 +147,10 @@ require(['underscore'], function() {
                     $j.extend(tempObj, elem);
 
                     // Remove properties from tempObj that aren't present in the form.
-                    delete tempObj.dcid;
-                    delete tempObj.id;
-                    delete tempObj.report_title;
-                    delete tempObj.type;
+                    tempObj.dcid = null;
+                    tempObj.id = null;
+                    tempObj.report_title = null;
+                    tempObj.type = null;
 
                     return _.isEqual(formObj, tempObj);
                 });
@@ -253,10 +253,10 @@ require(['underscore'], function() {
                     var selectedReport = _.filter(reports, function(currData) {
                         return currData.id === selectedOptionId.toString();
                     })[0];
-                    delete selectedReport.dcid;
-                    delete selectedReport.id;
-                    delete selectedReport.report_title;
-                    delete selectedReport.type;
+                    selectedReport.dcid = null;
+                    selectedReport.id = null;
+                    selectedReport.report_title = null;
+                    selectedReport.type = null;
 
                     if (_.isEqual(formObj, selectedReport)) {
                         formData = serializeFormForPost(selectedOptionId);
