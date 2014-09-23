@@ -1,5 +1,5 @@
 /*global $j,_,psData, psDialog, require*/
-require(['underscore'], function() {
+require(['underscore', 'service'], function (_, service) {
     'use strict';
     var template = $j($j('#template').html());
     var select = $j('table td').eq(0);
@@ -21,17 +21,17 @@ require(['underscore'], function() {
     var clearFormSelector = $j('input').eq(0);
     clearFormTemplate.insertAfter(clearFormSelector);
 
-    $j('#clear-form').on('click', function(e) {
+    $j('#clear-form').on('click', function (e) {
         // Clear the form by not passing in a report variable to loadFormFields.
         loadFormFields();
     });
 
     // Bind Field Name input boxes event handler
-    var inputs = $j('input').filter(function() {
+    var inputs = $j('input').filter(function () {
         return this.id.indexOf('tt') !== -1;
     });
 
-    _.each(inputs, function(elem, index) {
+    _.each(inputs, function (elem, index) {
         var jqElem = $j(elem);
         jqElem.attr('class', 'dialogR');
 
@@ -45,7 +45,7 @@ require(['underscore'], function() {
         manEntryTemplate.insertAfter(elem);
         var matchingfield_nameInput = $j('#tt' + (index + 1));
         var manEntryBtn = $j('.manEntBtn').last();
-        manEntryBtn.on('click', function(e) {
+        manEntryBtn.on('click', function (e) {
             e.preventDefault();
             matchingfield_nameInput.get(0).focus();
         });
@@ -61,7 +61,7 @@ require(['underscore'], function() {
     var reports = [];
 
     $j.when($j.get('/ws/schema/table/U_DEF_AUTOLOADER_LISTS?q=usersdcid==' + psData.userDCID + '&projection=*'), $j.get('/ws/schema/table/U_DEF_GLOBAL_LISTS?projection=*'))
-        .done(function(userReportsData, globalReportsData) {
+        .done(function (userReportsData, globalReportsData) {
             var autoloaderTableName = userReportsData[0]['name'].toLowerCase();
             var userReports = userReportsData[0]['record'];
 
@@ -72,12 +72,12 @@ require(['underscore'], function() {
             reports = userReports.concat(globalReports);
 
             // Insert list option tags into #loadlist select
-            _.each(globalReports, function(report) {
+            _.each(globalReports, function (report) {
                 var reportData = report['tables'][globalListsTableName];
                 var loadListTemplate = $j('#global-load-list-template').html();
 
                 // Get the Global Lists option.
-                var globalReportsOption = _.filter($j('#loadlist').children(), function(elem) {
+                var globalReportsOption = _.filter($j('#loadlist').children(), function (elem) {
                     return $j(elem).val() === 'Global Lists';
                 });
 
@@ -88,12 +88,12 @@ require(['underscore'], function() {
                 $j(renderedTemplate).insertAfter(select);
             });
 
-            _.each(userReports, function(report) {
+            _.each(userReports, function (report) {
                 var reportData = report['tables'][autoloaderTableName];
                 var loadListTemplate = $j('#user-load-list-template').html();
 
                 // Index of User Reports option in an Array of all child options of #loadlist.
-                var userReportsOption = _.filter($j('#loadlist').children(), function(elem) {
+                var userReportsOption = _.filter($j('#loadlist').children(), function (elem) {
                     return $j(elem).val() === 'User Lists';
                 });
 
@@ -108,12 +108,13 @@ require(['underscore'], function() {
                 $j(renderedTemplate).insertAfter(select);
             });
 
-            $j('#loadlist').on('change', function() {
+            $j('#loadlist').on('mouseup', function () {
+
                 var selectedOption = getSelectedOption();
                 if (selectedOption) {
                     var selectedOptionId = selectedOption.data().id;
                     if (selectedOptionId) {
-                        var selectedReport = _.filter(reports, function(currData) {
+                        var selectedReport = _.filter(reports, function (currData) {
                             return currData.id === selectedOptionId;
                         });
 
@@ -127,11 +128,13 @@ require(['underscore'], function() {
                             selectedReportObj = selectedReport[0]['tables'][globalListsTableName];
                         }
                         loadFormFields(selectedReportObj);
-                        // Make sure delete button is only visible for user lists.
+                        // Make sure delete and save button is only visible for user lists.
                         if (selectedOption.data().type === 'global') {
                             $j('.btnConfirmProxy').css({visibility: 'hidden'});
+                            $j('#saveSubmit').css({visibility: 'hidden'});
                         } else {
                             $j('.btnConfirmProxy').css({visibility: 'visible'})
+                            $j('#saveSubmit').css({visibility: 'visible'});
                         }
                     }
                 }
@@ -140,9 +143,9 @@ require(['underscore'], function() {
             var extraFieldsTemplate = $j($j('#extra-pref-fields-template').html());
             $j('form').append(extraFieldsTemplate);
 
-            $j('form').on('submit', function(e) {
+            $j('form').on('submit', function (e) {
                 var formObj = serializeFormToObject();
-                var matchingReport = _.find(reports, function(elem) {
+                var matchingReport = _.find(reports, function (elem) {
                     var tempObj = {};
                     $j.extend(tempObj, elem);
 
@@ -216,7 +219,7 @@ require(['underscore'], function() {
             var loadOptions = $j('#loadlist').children();
 
             // Get DOM option element that corresponds to previously run report.
-            var loadListOption = _.filter(loadOptions, function(elem) {
+            var loadListOption = _.filter(loadOptions, function (elem) {
                 return $j(elem).data().type === psData.lastRunReportType &&
                     $j(elem).data().id.toString() === psData.lastRunReportId;
             });
@@ -226,6 +229,7 @@ require(['underscore'], function() {
 
             if ($j(loadListOption).data().type === 'global') {
                 $j('.btnConfirmProxy').css({visibility: 'hidden'});
+                $j('#saveSubmit').css({visibility: 'hidden'});
             }
 
             /**
@@ -250,14 +254,25 @@ require(['underscore'], function() {
 
                 var selectedOption = getSelectedOption();
 
+                if (selectedOption) {
+                    formData = serializeFormToObject();
+                    service.update(formData);
+                }
+
                 // If an option is selected, check if the report they selected is the same exact settings in the form
                 // If so, just edit that report instead of making a new entry.
                 // If both of those conditions aren't true, make a new report record.
                 if (selectedOption) {
+
+
                     var selectedOptionId = selectedOption.data().id;
-                    var selectedReport = _.filter(reports, function(currData) {
-                        return currData.id === selectedOptionId.toString();
+                    var selectedReport = _.filter(reports, function (currData) {
+                        return currData.id === selectedOptionId;
                     })[0];
+
+                    if (selectedReport) {
+                        service.update()
+                    }
                     selectedReport.dcid = null;
                     selectedReport.id = null;
                     selectedReport.report_title = null;
@@ -280,7 +295,7 @@ require(['underscore'], function() {
                 // a page using the ~[tlist_child] tag must first be loaded.
                 // The contents of the page are never used, but for some reason any POST requests that change child tables will return a
                 // security violation if the enable_requests page isn't loaded first.
-                $j.get('/admin/studentlist/enable_requests.html?frn=204' + psData.userDCID, function() {
+                $j.get('/admin/studentlist/enable_requests.html?frn=204' + psData.userDCID, function () {
                     $j.ajax({
                         data: encodedData,
                         type: 'POST',
@@ -292,7 +307,7 @@ require(['underscore'], function() {
                 });
             });
 
-            $j('#btnDelete').on('click', function() {
+            $j('#btnDelete').on('click', function () {
                 var selectedReportId = $j('#loadlist').children().filter(':selected').data().id;
                 if (selectedReportId) {
                     var postData = [];
@@ -305,7 +320,7 @@ require(['underscore'], function() {
                         name: 'ac',
                         value: 'prim'
                     });
-                    $j.get('/admin/studentlist/enable_requests.html?frn=204' + psData.userDCID, function() {
+                    $j.get('/admin/studentlist/enable_requests.html?frn=204' + psData.userDCID, function () {
                         $j.ajax({
                             data: postData,
                             type: 'POST',
