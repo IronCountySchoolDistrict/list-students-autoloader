@@ -31,7 +31,7 @@ The report results page has also been modified to use Datatables to allow for da
 * Write PowerSchool help pages
 
 ### Where can I find help? ###
-* data@ironmail.org
+* data at ironmail dot org
 * Make a thread on the Customizations forum on PowerSource
 
 Thanks!
