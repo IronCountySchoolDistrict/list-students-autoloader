@@ -1,5 +1,5 @@
 /*global $j,_,psData, psDialog, require*/
-require(['underscore', 'service'], function (_, service) {
+require(['underscore'], function (_) {
     'use strict';
     var template = $j($j('#template').html());
     var select = $j('table td').eq(0);
@@ -35,11 +35,11 @@ require(['underscore', 'service'], function (_, service) {
         var jqElem = $j(elem);
         jqElem.attr('class', 'dialogR');
 
-        jqElem.attr('dialogcontent', '/admin/fields/fieldlist_yui.html?inf=' + elem.id + '&op=5');
+        jqElem.attr('href', '/admin/fields/fieldlist_yui.html?inf=studentSearchInput&search=y');
         jqElem.attr('title', 'Fields');
 
         // psDialogLazyWidget() only looks at the dialogcontent attribute for the url if href is present in tag, but is blank.
-        jqElem.attr('href', '');
+        //jqElem.attr('href', '');
 
         var manEntryTemplate = $j($j('#manual-entry-template').html());
         manEntryTemplate.insertAfter(elem);
