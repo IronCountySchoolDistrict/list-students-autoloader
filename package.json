@@ -1,0 +1,19 @@
+{
+  "name": "list-students-autoloader",
+  "version": "4.0.0",
+  "description": "Create, Modify and Delete your List Students reports",
+  "main": "",
+  "scripts": {
+    "test": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IronCountySchoolDistrict/list-students-autoloader.git"
+  },
+  "author": "IronCountySchoolDistrict",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/IronCountySchoolDistrict/list-students-autoloader/issues"
+  },
+  "homepage": "https://github.com/IronCountySchoolDistrict/list-students-autoloader#readme"
+}

@@ -1,0 +1,6 @@
+.DS_Store
+.idea
+*.zip
+node_modules
+dist
+config.json
