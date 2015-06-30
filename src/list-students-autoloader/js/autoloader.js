@@ -246,30 +246,23 @@ require(['underscore'], function (_) {
 
             $j('#saveSubmit').on('click', function (e) {
                 e.preventDefault();
+                loadingDialogInstance.open();
                 var formObj = serializeFormToObject();
                 var formData;
 
                 var selectedOption = getSelectedOption();
 
-                if (selectedOption) {
-                    formData = serializeFormToObject();
-                    service.update(formData);
-                }
-
                 // If an option is selected, check if the report they selected is the same exact settings in the form
                 // If so, just edit that report instead of making a new entry.
                 // If both of those conditions aren't true, make a new report record.
                 if (selectedOption) {
-
+                    formData = serializeFormToObject();
 
                     var selectedOptionId = selectedOption.data().id;
                     var selectedReport = _.filter(reports, function (currData) {
                         return currData.id === selectedOptionId;
                     })[0];
 
-                    if (selectedReport) {
-                        service.update()
-                    }
                     selectedReport.dcid = null;
                     selectedReport.id = null;
                     selectedReport.report_title = null;
@@ -305,6 +298,7 @@ require(['underscore'], function (_) {
             });
 
             $j('#btnDelete').on('click', function () {
+                loadingDialogInstance.open();
                 var selectedReportId = $j('#loadlist').children().filter(':selected').data().id;
                 if (selectedReportId) {
                     var postData = [];

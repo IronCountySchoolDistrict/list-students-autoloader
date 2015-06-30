@@ -1,1 +1,1 @@
-<link href="<!-- @echo IMAGE_SERVER_URL -->/scripts/list-students-autoloader/css/print-list.css" rel="stylesheet" media="print">
+<link href="<!-- @echo IMAGE_SERVER_URL -->/list-students-autoloader/css/print-list.css" rel="stylesheet" media="print">
