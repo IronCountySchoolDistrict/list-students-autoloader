@@ -64,4 +64,4 @@
     <p class="error-message">Field Name required for every Column Title</p>
 </script>
 
-<script src="<!-- @echo IMAGE_SERVER_URL -->/list-students-autoloader/js/autoloader.js"></script>
+<script src="/scripts/list-students-autoloader/js/autoloader.js"></script>

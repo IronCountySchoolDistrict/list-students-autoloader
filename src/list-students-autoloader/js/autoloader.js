@@ -222,11 +222,13 @@ require(['underscore'], function (_) {
             });
 
             // Hide Delete button on load if the last report that was run was a global report.
-            $j(loadListOption[0]).prop({'selected': true});
+            if (loadListOption.length > 1) {
+              $j(loadListOption[0]).prop({'selected': true});
 
-            if ($j(loadListOption).data().type === 'global') {
-                $j('.btnConfirmProxy').css({visibility: 'hidden'});
-                $j('#saveSubmit').css({visibility: 'hidden'});
+              if ($j(loadListOption).data().type === 'global') {
+                  $j('.btnConfirmProxy').css({visibility: 'hidden'});
+                  $j('#saveSubmit').css({visibility: 'hidden'});
+              }
             }
 
             /**
@@ -521,4 +523,3 @@ require(['underscore'], function (_) {
         }
     }
 });
-
