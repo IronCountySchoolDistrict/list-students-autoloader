@@ -29,6 +29,10 @@
     <button type="submit" id="saveSubmit">Save</button>
 </script>
 
+<script type="text/template" id="new-button-template">
+    <button type="submit" id="newSubmit">New</button>
+</script>
+
 <script type="text/template" id="delete-button-template">
     <span id="delete-container" style="float: left;">
         <a id="btnDelete" class="button confirmationReq">Delete</a>
