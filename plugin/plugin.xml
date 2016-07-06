@@ -5,6 +5,7 @@
         name="List Students Autoloader"
         version="4.0.0"
         xsi:schemaLocation="http://plugin.powerschool.pearson.com plugin.xsd">
+
     <publisher name="Iron County School District Data Team">
         <contact email="data@ironmail.org"/>
     </publisher>
