@@ -1,7 +1,0 @@
-<permission_mappings>
-  <permission name='/admin/studentlist/studentlist1.html'>
-   <implies allow="get">/ws/schema/table/U_DEF_AUTOLOADER_LISTS</implies>
-   <implies allow="get">/ws/schema/table/U_DEF_GLOBAL_LISTS</implies>
-   <implies allow="post">/ws/schema/table/U_DEF_AUTOLOADER_LISTS</implies>
-  </permission>
-</permission_mappings>
