@@ -34,23 +34,23 @@ require(['underscore'], function(_) {
   var inputs = $j('input').filter(function() {
     return this.id.indexOf('tt') !== -1;
   });
-
-  _.each(inputs, function(elem, index) {
-    var jqElem = $j(elem);
-    jqElem.attr('class', 'dialogR');
-
-    jqElem.attr('href', '/admin/fields/fieldlist_yui.html?inf=' + jqElem.attr('id') + '&op=5');
-    jqElem.attr('title', 'Fields');
-
-    var manEntryTemplate = $j($j('#manual-entry-template').html());
-    manEntryTemplate.insertAfter(elem);
-    var matchingfield_nameInput = $j('#tt' + (index + 1));
-    var manEntryBtn = $j('.manEntBtn').last();
-    manEntryBtn.on('click', function(e) {
-      e.preventDefault();
-      matchingfield_nameInput.get(0).focus();
-    });
-  });
+  // Enables auto loading of fields with manual button input
+  // _.each(inputs, function(elem, index) {
+  //   var jqElem = $j(elem);
+  //   jqElem.attr('class', 'dialogR');
+  //
+  //   jqElem.attr('href', '/admin/fields/fieldlist_yui.html?inf=' + jqElem.attr('id') + '&op=5');
+  //   jqElem.attr('title', 'Fields');
+  //
+  //   var manEntryTemplate = $j($j('#manual-entry-template').html());
+  //   manEntryTemplate.insertAfter(elem);
+  //   var matchingfield_nameInput = $j('#tt' + (index + 1));
+  //   var manEntryBtn = $j('.manEntBtn').last();
+  //   manEntryBtn.on('click', function(e) {
+  //     e.preventDefault();
+  //     matchingfield_nameInput.get(0).focus();
+  //   });
+  // });
 
   inputs.off('click');
   inputs.on('click', psDialog);
@@ -86,9 +86,11 @@ require(['underscore'], function(_) {
 
         // Get the next option in the select tag, which is the dash-separator option.
         var select = $j(globalReportsOption).next();
-        var renderedTemplate = _.template(loadListTemplate, {
+        var compiledTemplate = _.template(loadListTemplate);
+        var renderedTemplate = compiledTemplate({
           report: reportData
         });
+
 
         $j(renderedTemplate).insertAfter(select);
       });
@@ -108,14 +110,15 @@ require(['underscore'], function(_) {
 
         // Get the next option in the select element, which is the dash-separator option.
         var select = $j(userReportsOption).next();
-        var renderedTemplate = _.template(loadListTemplate, {
+        var compiledTemplate = _.template(loadListTemplate);
+        var renderedTemplate = compiledTemplate({
           report: reportData
         });
 
         $j(renderedTemplate).insertAfter(select);
       });
 
-      $j('#loadlist').on('mouseup', function() {
+      $j('#loadlist').on('change', function() {
 
         var selectedOption = getSelectedOption();
         if (selectedOption) {
