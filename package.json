@@ -21,7 +21,7 @@
     "babel-cli": "^6.6.5",
     "babel-register": "^6.7.2",
     "gulp": "^3.9.1",
-    "gulp-ps-tasks": "^0.3.4"
+    "gulp-ps-tasks": "0.6.2"
   },
   "devDependencies": {
     "babel-core": "^6.10.4",
