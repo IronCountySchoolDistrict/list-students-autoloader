@@ -68,4 +68,14 @@
     <p class="error-message">Field Name required for every Column Title</p>
 </script>
 
-<script src="/scripts/list-students-autoloader/js/autoloader.js"></script>
+<script>
+  require.config({
+    paths: {
+      autoloader: '/scripts/list-students-autoloader/js/autoloader'
+    }
+  });
+
+  require(['autoloader'], function(autoloader) {
+    autoloader.default();
+  });
+</script>
