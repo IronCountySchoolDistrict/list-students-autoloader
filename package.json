@@ -1,6 +1,6 @@
 {
   "name": "list-students-autoloader",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "Create, Modify and Delete your List Students reports",
   "main": "",
   "scripts": {
@@ -17,10 +17,11 @@
   },
   "homepage": "https://github.com/IronCountySchoolDistrict/list-students-autoloader#readme",
   "devDependencies": {
-    "babel-cli": "^6.18.0",
-    "babel-preset-es2015": "^6.18.0",
-    "babel-register": "^6.18.0",
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.0.3",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-register": "^6.26.0",
     "gulp": "^3.9.1",
-    "gulp-ps-tasks": "^0.6.2"
+    "gulp-ps-tasks": "^0.6.3"
   }
 }
