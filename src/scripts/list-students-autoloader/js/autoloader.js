@@ -10,9 +10,9 @@ export default function() {
   var btnSubmit = $('#btnSubmit');
   saveButtonTemplate.insertBefore(btnSubmit);
 
-  var saveButtonTemplate = $($('#new-button-template').html());
+  var newButtonTemplate = $($('#new-button-template').html());
   var saveSubmit = $('#saveSubmit');
-  saveButtonTemplate.insertBefore(saveSubmit);
+  newButtonTemplate.insertBefore(saveSubmit);
 
   var deleteButtonTemplate = $($('#delete-button-template').html());
   var saveBtn = $('#saveSubmit');
@@ -37,7 +37,6 @@ export default function() {
   });
 
   inputs.off('click');
-  inputs.on('click', psDialog);
   inputs.css({visibility: 'visible'});
 
   $('#btnDelete').makeConfReqButton();
