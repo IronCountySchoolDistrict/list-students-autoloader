@@ -17,11 +17,28 @@
   },
   "homepage": "https://github.com/IronCountySchoolDistrict/list-students-autoloader#readme",
   "devDependencies": {
-    "@babel/cli": "^7.0.0-beta.51",
-    "@babel/preset-es2015": "^7.0.0-beta.51",
-    "@babel/register": "^7.0.0-beta.51",
-    "babel-eslint": "^8.0.3",
-    "gulp": "^3.9.1",
-    "gulp-ps-tasks": "^0.7.0"
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.3.4",
+    "@babel/plugin-transform-modules-amd": "^7.2.0",
+    "@babel/plugin-transform-modules-commonjs": "^7.4.4",
+    "@babel/plugin-transform-regenerator": "^7.4.5",
+    "@babel/plugin-transform-runtime": "^7.4.4",
+    "@babel/preset-env": "^7.3.4",
+    "@babel/register": "^7.0.0",
+    "babel-loader": "^8.0.6",
+    "css-loader": "^3.0.0",
+    "gulp": "^4.0.2",
+    "gulp4-ps-tasks": "^0.1.8",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.7.0",
+    "pkginfo": "^0.4.1",
+    "sass-loader": "^7.1.0",
+    "underscore": "^1.9.1",
+    "webpack": "^4.35.0",
+    "webpack-merge": "^4.2.1"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.4.5"
   }
 }

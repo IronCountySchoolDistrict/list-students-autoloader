@@ -1,5 +1,6 @@
 import _ from 'underscore';
 import $ from 'jquery';
+import '../css/print-list.css'
 
 export default function() {
   var template = $($('#template').html());

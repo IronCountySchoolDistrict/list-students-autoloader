@@ -1,0 +1,23 @@
+{
+    "image_server_name": {
+      "ps_url": "",
+      "deploy_credentials": {
+        "host": "",
+        "user": "",
+        "pass": "",
+        "remotePath": ""
+      }
+    },
+  
+    "image_server_name2": {
+      "ps_url": "https://ps.example.com",
+      "deploy_credentials": {
+        "host": "sftp_host",
+        "user": "user",
+        "pass": "password",
+        "remotePath": "/path/to/assets/folder"
+      }
+    },
+  
+    "default_deploy_target": "image_server_name"
+  }
