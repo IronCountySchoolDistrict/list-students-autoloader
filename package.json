@@ -39,6 +39,10 @@
     "webpack-merge": "^4.2.1"
   },
   "dependencies": {
-    "@babel/runtime": "^7.4.5"
+    "@babel/runtime": "^7.4.5",
+    "decompress": "^4.2.1",
+    "kind-of": "^6.0.3",
+    "lodash.template": "^4.5.0",
+    "node-sass": "^4.13.1"
   }
 }
