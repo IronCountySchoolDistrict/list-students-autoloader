@@ -328,45 +328,45 @@ export default function() {
   function serializeFormToObject() {
     var formObj = {};
     var aFormElements = document.forms.aForm.elements;
-    formObj.field_name1 = aFormElements[3].value;
-    formObj.column_title1 = aFormElements[4].value;
-    formObj.field_name2 = aFormElements[5].value;
-    formObj.column_title2 = aFormElements[6].value;
-    formObj.field_name3 = aFormElements[7].value;
-    formObj.column_title3 = aFormElements[8].value;
-    formObj.field_name4 = aFormElements[9].value;
-    formObj.column_title4 = aFormElements[10].value;
-    formObj.field_name5 = aFormElements[11].value;
-    formObj.column_title5 = aFormElements[12].value;
-    formObj.field_name6 = aFormElements[13].value;
-    formObj.column_title6 = aFormElements[14].value;
-    formObj.field_name7 = aFormElements[15].value;
-    formObj.column_title7 = aFormElements[16].value;
-    formObj.field_name8 = aFormElements[17].value;
-    formObj.column_title8 = aFormElements[18].value;
-    formObj.field_name9 = aFormElements[19].value;
-    formObj.column_title9 = aFormElements[20].value;
-    formObj.field_name10 = aFormElements[21].value;
-    formObj.column_title10 = aFormElements[22].value;
-    formObj.cell_padding = aFormElements[23].value;
-    formObj.rows_breaks = aFormElements[24].value;
-    if (aFormElements[26].checked) {
+    formObj.field_name1 = aFormElements[1].value;
+    formObj.column_title1 = aFormElements[2].value;
+    formObj.field_name2 = aFormElements[3].value;
+    formObj.column_title2 = aFormElements[4].value;
+    formObj.field_name3 = aFormElements[5].value;
+    formObj.column_title3 = aFormElements[6].value;
+    formObj.field_name4 = aFormElements[7].value;
+    formObj.column_title4 = aFormElements[8].value;
+    formObj.field_name5 = aFormElements[9].value;
+    formObj.column_title5 = aFormElements[10].value;
+    formObj.field_name6 = aFormElements[11].value;
+    formObj.column_title6 = aFormElements[12].value;
+    formObj.field_name7 = aFormElements[13].value;
+    formObj.column_title7 = aFormElements[14].value;
+    formObj.field_name8 = aFormElements[15].value;
+    formObj.column_title8 = aFormElements[16].value;
+    formObj.field_name9 = aFormElements[17].value;
+    formObj.column_title9 = aFormElements[18].value;
+    formObj.field_name10 = aFormElements[19].value;
+    formObj.column_title10 = aFormElements[20].value;
+    formObj.cell_padding = aFormElements[21].value;
+    formObj.rows_breaks = aFormElements[22].value;
+    if (aFormElements[23].checked) {
       formObj.gridlines = '1';
     } else {
       formObj.gridlines = '0';
     }
-    if (aFormElements[27].checked) {
+    if (aFormElements[24].checked) {
       formObj.export_val = '1';
     } else {
       formObj.export_val = '0';
     }
 
-    formObj.sort_field_name1 = aFormElements[28].value;
-    formObj.sort_dir1 = aFormElements[29].value;
-    formObj.sort_field_name2 = aFormElements[30].value;
-    formObj.sort_dir2 = aFormElements[31].value;
-    formObj.sort_field_name3 = aFormElements[32].value;
-    formObj.sort_dir3 = aFormElements[33].value;
+    formObj.sort_field_name1 = aFormElements[25].value;
+    formObj.sort_dir1 = aFormElements[26].value;
+    formObj.sort_field_name2 = aFormElements[27].value;
+    formObj.sort_dir2 = aFormElements[28].value;
+    formObj.sort_field_name3 = aFormElements[29].value;
+    formObj.sort_dir3 = aFormElements[30].value;
     return formObj;
   }
 
@@ -449,115 +449,117 @@ export default function() {
       aFormElements[0].value = report.hasOwnProperty('report_title')
         ? report.report_title
         : '';
-      aFormElements[3].value = report.hasOwnProperty('field_name1')
+      aFormElements[1].value = report.hasOwnProperty('field_name1')
         ? report.field_name1
         : '';
-      aFormElements[4].value = report.hasOwnProperty('column_title1')
+      aFormElements[2].value = report.hasOwnProperty('column_title1')
         ? report.column_title1
         : '';
-      aFormElements[5].value = report.hasOwnProperty('field_name2')
+      aFormElements[3].value = report.hasOwnProperty('field_name2')
         ? report.field_name2
         : '';
-      aFormElements[6].value = report.hasOwnProperty('column_title2')
+      aFormElements[4].value = report.hasOwnProperty('column_title2')
         ? report.column_title2
         : '';
-      aFormElements[7].value = report.hasOwnProperty('field_name3')
+      aFormElements[5].value = report.hasOwnProperty('field_name3')
         ? report.field_name3
         : '';
-      aFormElements[8].value = report.hasOwnProperty('column_title3')
+      aFormElements[6].value = report.hasOwnProperty('column_title3')
         ? report.column_title3
         : '';
-      aFormElements[9].value = report.hasOwnProperty('field_name4')
+      aFormElements[7].value = report.hasOwnProperty('field_name4')
         ? report.field_name4
         : '';
-      aFormElements[10].value = report.hasOwnProperty('column_title4')
+      aFormElements[8].value = report.hasOwnProperty('column_title4')
         ? report.column_title4
         : '';
-      aFormElements[11].value = report.hasOwnProperty('field_name5')
+      aFormElements[9].value = report.hasOwnProperty('field_name5')
         ? report.field_name5
         : '';
-      aFormElements[12].value = report.hasOwnProperty('column_title5')
+      aFormElements[10].value = report.hasOwnProperty('column_title5')
         ? report.column_title5
         : '';
-      aFormElements[13].value = report.hasOwnProperty('field_name6')
+      aFormElements[11].value = report.hasOwnProperty('field_name6')
         ? report.field_name6
         : '';
-      aFormElements[14].value = report.hasOwnProperty('column_title6')
+      aFormElements[12].value = report.hasOwnProperty('column_title6')
         ? report.column_title6
         : '';
-      aFormElements[15].value = report.hasOwnProperty('field_name7')
+      aFormElements[13].value = report.hasOwnProperty('field_name7')
         ? report.field_name7
         : '';
-      aFormElements[16].value = report.hasOwnProperty('column_title7')
+      aFormElements[14].value = report.hasOwnProperty('column_title7')
         ? report.column_title7
         : '';
-      aFormElements[17].value = report.hasOwnProperty('field_name8')
+      aFormElements[15].value = report.hasOwnProperty('field_name8')
         ? report.field_name8
         : '';
-      aFormElements[18].value = report.hasOwnProperty('column_title8')
+      aFormElements[16].value = report.hasOwnProperty('column_title8')
         ? report.column_title8
         : '';
-      aFormElements[19].value = report.hasOwnProperty('field_name9')
+      aFormElements[17].value = report.hasOwnProperty('field_name9')
         ? report.field_name9
         : '';
-      aFormElements[20].value = report.hasOwnProperty('column_title9')
+      aFormElements[18].value = report.hasOwnProperty('column_title9')
         ? report.column_title9
         : '';
-      aFormElements[21].value = report.hasOwnProperty('field_name10')
+      aFormElements[19].value = report.hasOwnProperty('field_name10')
         ? report.field_name10
         : '';
-      aFormElements[22].value = report.hasOwnProperty('column_title10')
+      aFormElements[20].value = report.hasOwnProperty('column_title10')
         ? report.column_title10
         : '';
-      aFormElements[23].value = report.hasOwnProperty('cell_padding')
+      aFormElements[21].value = report.hasOwnProperty('cell_padding')
         ? report.cell_padding
         : '';
-      aFormElements[24].value = report.hasOwnProperty('rows_breaks')
+      aFormElements[22].value = report.hasOwnProperty('rows_breaks')
         ? report.rows_breaks
         : '';
 
       if (report.hasOwnProperty('gridlines')) {
         if (!report.gridlines || report.gridlines === '0') {
-          aFormElements[26].checked = false;
+          aFormElements[23].checked = false;
         } else {
-          aFormElements[26].checked = true;
+          aFormElements[24].checked = true;
         }
       }
 
       if (report.hasOwnProperty('export_val')) {
         if (!report.export_val || report.export_val === '0') {
-          aFormElements[27].checked = false;
+          aFormElements[25].checked = false;
         } else {
-          aFormElements[27].checked = true;
+          aFormElements[25].checked = true;
         }
       }
-      aFormElements[28].value = report.hasOwnProperty('sort_field_name1')
+      aFormElements[26].value = report.hasOwnProperty('sort_field_name1')
         ? report.sort_field_name1
         : '';
       if (report.hasOwnProperty('sort_dir1')) {
         report.sort_dir1 === 'a'
-          ? aFormElements[29].value = '<'
-          : aFormElements[29].value = '>';
+          ? aFormElements[27].value = '<'
+          : aFormElements[27].value = '>';
       }
-      aFormElements[30].value = report.hasOwnProperty('sort_field_name2')
+      aFormElements[28].value = report.hasOwnProperty('sort_field_name2')
         ? report.sort_field_name2
         : '';
       if (report.hasOwnProperty('sort_dir2')) {
         report.sort_dir2 === 'a'
-          ? aFormElements[31].value = '<'
-          : aFormElements[31].value = '>';
+          ? aFormElements[29].value = '<'
+          : aFormElements[29].value = '>';
       }
-      aFormElements[32].value = report.hasOwnProperty('sort_field_name3')
+      aFormElements[30].value = report.hasOwnProperty('sort_field_name3')
         ? report.sort_field_name3
         : '';
       if (report.hasOwnProperty('sort_dir3')) {
         report.sort_dir3 === 'a'
-          ? aFormElements[33].value = '<'
-          : aFormElements[33].value = '>';
+          ? aFormElements[31].value = '<'
+          : aFormElements[31].value = '>';
       }
-      aFormElements[34].value = 'prim';
+      aFormElements[32].value = 'prim';
     } else {
       aFormElements[0].value = '';
+      aFormElements[1].value = '';
+      aFormElements[2].value = '';
       aFormElements[3].value = '';
       aFormElements[4].value = '';
       aFormElements[5].value = '';
@@ -578,17 +580,15 @@ export default function() {
       aFormElements[20].value = '';
       aFormElements[21].value = '';
       aFormElements[22].value = '';
-      aFormElements[23].value = '';
-      aFormElements[24].value = '';
-      aFormElements[26].checked = false;
-      aFormElements[27].checked = false;
-      aFormElements[28].value = '';
-      aFormElements[29].value = '>';
-      aFormElements[30].value = '';
-      aFormElements[31].value = '>';
-      aFormElements[32].value = '';
-      aFormElements[33].value = '>';
-      aFormElements[34].value = 'prim';
+      aFormElements[23].checked = false;
+      aFormElements[24].checked = false;
+      aFormElements[25].value = '';
+      aFormElements[26].value = '>';
+      aFormElements[27].value = '';
+      aFormElements[28].value = '>';
+      aFormElements[29].value = '';
+      aFormElements[30].value = '>';
+      aFormElements[31].value = 'prim';
     }
   }
 }
