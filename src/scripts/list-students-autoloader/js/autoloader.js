@@ -28,13 +28,8 @@ export default function () {
   clearFormTemplate.insertAfter(clearFormSelector);
 
   $("#clear-form").on("click", function (e) {
-    // Clear the form by changing all input text values to "".
-    var elements = document.getElementsByTagName("input");
-    for (var ii = 0; ii < elements.length; ii++) {
-      if (elements[ii].type == "text") {
-        elements[ii].value = "";
-      }
-    }
+    // Clear the form by not passing in a report variable to loadFormFields.
+    loadFormFields();
   });
 
   // Bind Field Name input boxes event handler
