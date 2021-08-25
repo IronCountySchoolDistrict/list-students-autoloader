@@ -427,6 +427,7 @@ export default function () {
       .filter(':not("[type=hidden]")')
       .filter(':not("button")')
       .filter(':not("#loadlist")')
+      .filter(':not("#termText")')
       .filter(':not(".headerrow")');
 
     // Field names of database extension table in the order they appear on the form.
