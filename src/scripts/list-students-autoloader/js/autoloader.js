@@ -24,7 +24,7 @@ export default function () {
   noteTemplate.insertAfter(headerSelect);
 
   var clearFormTemplate = $($("#clear-form-template").html());
-  var clearFormSelector = $("input").eq(0);
+  var clearFormSelector = $("#btnDelete");
   clearFormTemplate.insertAfter(clearFormSelector);
 
   $("#clear-form").on("click", function (e) {
@@ -425,8 +425,10 @@ export default function () {
     var formData = [];
     var formInputs = $(":input")
       .filter(':not("[type=hidden]")')
+      .filter(':not("#schoolSearchField_value")')
       .filter(':not("button")')
       .filter(':not("#loadlist")')
+      .filter(':not("#termText")')
       .filter(':not(".headerrow")');
 
     // Field names of database extension table in the order they appear on the form.
@@ -583,43 +585,43 @@ export default function () {
         report.hasOwnProperty("column_title12") ? report.column_title12 : ""
       );
     } else {
-      getReportTitleElem().val();
+      getReportTitleElem().val("");
 
-      $("#tt1").val();
-      getColumnTitleElem($("#tt1")).val();
+      $("#tt1").val("");
+      getColumnTitleElem($("#tt1")).val("");
 
-      $("#tt2").val();
-      getColumnTitleElem($("#tt2")).val();
+      $("#tt2").val("");
+      getColumnTitleElem($("#tt2")).val("");
 
-      $("#tt3").val();
-      getColumnTitleElem($("#tt3")).val();
+      $("#tt3").val("");
+      getColumnTitleElem($("#tt3")).val("");
 
-      $("#tt4").val();
-      getColumnTitleElem($("#tt4")).val();
+      $("#tt4").val("");
+      getColumnTitleElem($("#tt4")).val("");
 
-      $("#tt5").val();
-      getColumnTitleElem($("#tt5")).val();
+      $("#tt5").val("");
+      getColumnTitleElem($("#tt5")).val("");
 
-      $("#tt6").val();
-      getColumnTitleElem($("#tt6")).val();
+      $("#tt6").val("");
+      getColumnTitleElem($("#tt6")).val("");
 
-      $("#tt7").val();
-      getColumnTitleElem($("#tt7")).val();
+      $("#tt7").val("");
+      getColumnTitleElem($("#tt7")).val("");
 
-      $("#tt8").val();
-      getColumnTitleElem($("#tt8")).val();
+      $("#tt8").val("");
+      getColumnTitleElem($("#tt8")).val("");
 
-      $("#tt9").val();
-      getColumnTitleElem($("#tt9")).val();
+      $("#tt9").val("");
+      getColumnTitleElem($("#tt9")).val("");
 
-      $("#tt10").val();
-      getColumnTitleElem($("#tt10")).val();
+      $("#tt10").val("");
+      getColumnTitleElem($("#tt10")).val("");
 
-      $("#tt11").val();
-      getColumnTitleElem($("#tt11")).val();
+      $("#tt11").val("");
+      getColumnTitleElem($("#tt11")).val("");
 
-      $("#tt12").val();
-      getColumnTitleElem($("#tt12")).val();
+      $("#tt12").val("");
+      getColumnTitleElem($("#tt12")).val("");
     }
   }
 }
